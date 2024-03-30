@@ -4,10 +4,9 @@ export function CardBody({d,card_dim,card_display}) {
       <rect width="${card_dim.w}" height="${card_dim.h}" class="card-body-rect" />
       <g transform="translate(${card_dim.text_x}, ${card_dim.text_y})">
         <text clip-path="url(#card_text_clip)">
-          <tspan x="${0}" dy="${14}">${card_display[0](d.data)}</tspan>
-          <tspan x="${0}" dy="${14}" font-size="10">${card_display[1](d.data)}</tspan>
+          <tspan x="${12}" dy="${14}">${card_display[0](d.data)}</tspan>
         </text>
-        <rect width="${card_dim.w-card_dim.text_x-10}" height="${card_dim.h-20}" style="mask: url(#fade)" class="text-overflow-mask" /> 
+        <rect width="${card_dim.w-card_dim.text_x-10}" height="${card_dim.h-20}" style="mask: url(#fade)" class="text-overflow-mask" />
       </g>
     </g>
   `)
@@ -102,7 +101,7 @@ export function LinkBreakIcon({x,y,rt,closed}) {
     <g style="
           transform: translate(-12.2px, -.5px);
           cursor: pointer;
-        " 
+        "
         fill="currentColor" class="card_break_link${closed ? ' closed' : ''}"
       >
       <g style="transform: translate(${x}px,${y}px)scale(.02)rotate(${rt+'deg'})">
@@ -146,12 +145,12 @@ export function LinkBreakIconWrapper({d,card_dim}) {
 export function CardImage({d, image, card_dim, maleIcon, femaleIcon}) {
   return ({template: (`
     <g style="transform: translate(${card_dim.img_x}px,${card_dim.img_y}px);" class="card_image" clip-path="url(#card_image_clip)">
-      ${image 
+      ${image
         ? `<image href="${image}" height="${card_dim.img_h}" width="${card_dim.img_w}" preserveAspectRatio="xMidYMin slice" />`
-        : (d.data.data.gender === "F" && !!femaleIcon) ? femaleIcon({card_dim}) 
-        : (d.data.data.gender === "M" && !!maleIcon) ? maleIcon({card_dim}) 
+        : (d.data.data.gender === "F" && !!femaleIcon) ? femaleIcon({card_dim})
+        : (d.data.data.gender === "M" && !!maleIcon) ? maleIcon({card_dim})
         : GenderlessIcon()
-      }      
+      }
     </g>
   `)})
 
@@ -160,8 +159,8 @@ export function CardImage({d, image, card_dim, maleIcon, femaleIcon}) {
       <g class="genderless-icon">
         <rect height="${card_dim.img_h}" width="${card_dim.img_w}" fill="rgb(59, 85, 96)" />
         <g transform="scale(${card_dim.img_w*0.001616})">
-         <path transform="translate(50,40)" fill="lightgrey" d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 
-            64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 
+         <path transform="translate(50,40)" fill="lightgrey" d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112
+            64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3
             0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z" />
         </g>
       </g>

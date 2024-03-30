@@ -21,13 +21,16 @@ export function Card(props) {
       card_dim = props.card_dim,
       show_mini_tree = !isAllRelativeDisplayed(d, store.state.tree.data),
       unknown_lbl = props.cardEditForm ? 'ADD' : 'UNKNOWN',
+      edit_icon_template = props.editIcon ? props.editIcon : PencilIcon({card_dim, x: card_dim.w-46, y: card_dim.h-20}).template,
+      add_icon_template = props.addIcon ? props.addIcon : PlusIcon({card_dim, x: card_dim.w-26, y: card_dim.h-20}).template,
+      card_body_template = props.cardBody ? props.cardBody : CardBody({d,card_dim, card_display: props.card_display}).template,
 
       mini_tree = () => !d.data.to_add && show_mini_tree ? MiniTree({d,card_dim}).template : '',
       card_body_outline = () => CardBodyOutline({d,card_dim,is_new:d.data.to_add}).template,
-      card_body = () => !d.data.to_add ? CardBody({d,card_dim, card_display: props.card_display}).template : CardBodyAddNew({d,card_dim, card_add: props.cardEditForm, label: unknown_lbl}).template,
+      card_body = () => !d.data.to_add ? card_body_template : CardBodyAddNew({d,card_dim, card_add: props.cardEditForm, label: unknown_lbl}).template,
       card_image = () => !d.data.to_add ? CardImage({d, image: d.data.data.avatar || null, card_dim, maleIcon: null, femaleIcon: null}).template : '',
-      edit_icon = () => !d.data.to_add && props.cardEditForm ? PencilIcon({card_dim, x: card_dim.w-46, y: card_dim.h-20}).template : '',
-      add_icon = () => !d.data.to_add && props.cardEditForm ? PlusIcon({card_dim, x: card_dim.w-26, y: card_dim.h-20}).template : '',
+      edit_icon = () => !d.data.to_add && props.cardEditForm ? edit_icon_template : '',
+      add_icon = () => !d.data.to_add && props.cardEditForm ? add_icon_template : '',
       link_break_icon = () => LinkBreakIconWrapper({d,card_dim})
 
     el.innerHTML = (`
@@ -84,7 +87,7 @@ export function Card(props) {
         </linearGradient>
         <mask id="fade" maskContentUnits="objectBoundingBox"><rect width="1" height="1" fill="url(#fadeGrad)"/></mask>
         <clipPath id="card_clip"><path d="${curvedRectPath({w:card_dim.w, h:card_dim.h}, 5)}"></clipPath>
-        <clipPath id="card_text_clip"><rect width="${card_dim.w-card_dim.text_x-10}" height="${card_dim.h-10}"></rect></clipPath>
+        <clipPath id="card_text_clip"><rect width="${card_dim.w-card_dim.text_x}" height="${card_dim.h-10}"></rect></clipPath>
         <clipPath id="card_image_clip"><path d="M0,0 Q 0,0 0,0 H${card_dim.img_w} V${card_dim.img_h} H0 Q 0,${card_dim.img_h} 0,${card_dim.img_h} z"></clipPath>
         <clipPath id="card_image_clip_curved"><path d="${curvedRectPath({w: card_dim.img_w, h:card_dim.img_h}, 5, ['rx', 'ry'])}"></clipPath>
       </defs>
