@@ -20,7 +20,7 @@ export function Card(props) {
       gender_class = d.data.data.gender === 'M' ? 'card-male' : d.data.data.gender === 'F' ? 'card-female' : 'card-genderless',
       card_dim = props.card_dim,
       show_mini_tree = !isAllRelativeDisplayed(d, store.state.tree.data),
-      unknown_lbl = props.cardEditForm ? 'ADD' : 'UNKNOWN',
+      unknown_lbl = props.cardEditForm ? '' : 'UNKNOWN',
       edit_icon_template = props.editIcon ? props.editIcon : PencilIcon({card_dim, x: card_dim.w-46, y: card_dim.h-20}).template,
       add_icon_template = props.addIcon ? props.addIcon : PlusIcon({card_dim, x: card_dim.w-26, y: card_dim.h-20}).template,
       card_body_template = props.cardBody ? props.cardBody : CardBody({d,card_dim, card_display: props.card_display}).template,
